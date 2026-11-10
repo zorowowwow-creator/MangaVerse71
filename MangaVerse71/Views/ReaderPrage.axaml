@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MangaVerse71.Views.ReaderPage">
+
+    <Grid Background="#090B12"
+          RowDefinitions="Auto,*">
+
+        <Border Padding="20"
+                Background="#111522">
+            <TextBlock Text="MANGA READER"
+                       Foreground="#A78BFA"
+                       FontSize="26"
+                       FontWeight="Bold"/>
+        </Border>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="20"
+                        Spacing="15">
+
+                <TextBlock Text="Select a chapter"
+                           Foreground="White"
+                           FontSize="22"/>
+
+                <TextBlock Text="Chapter 1"
+                           Foreground="#A78BFA"
+                           FontSize="18"/>
+
+                <TextBlock Text="Manga pages will appear here."
+                           Foreground="White"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

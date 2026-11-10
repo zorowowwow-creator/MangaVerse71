@@ -1,0 +1,101 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MangaVerse71.ViewModels"
+             xmlns:models="using:MangaVerse71.Models"
+             x:Class="MangaVerse71.Views.MangaPage"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollViewer Background="#111522">
+        <StackPanel Margin="25" Spacing="20">
+
+            <Button Content="← Главная"
+                    Command="{Binding GoHomeCommand}"
+                    Background="#191D2C"
+                    Foreground="White"
+                    HorizontalAlignment="Left"/>
+
+            <TextBlock Text="MANGA VERSE"
+                       Foreground="#A78BFA"
+                       FontSize="13"/>
+
+            <TextBlock Text="Найти свою мангу"
+                       Foreground="White"
+                       FontSize="30"
+                       FontWeight="Bold"/>
+
+             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <TextBox Grid.Column="0"
+                         Text="{Binding MangaSearchText}"
+                         Watermark="Поиск...."/>
+
+                <Button Grid.Column="1"
+                        Content="НАЙТИ"
+                        Command="{Binding SearchMangaCommand}"
+                        Background="#A78BFA"
+                        Foreground="White"/>
+                    <TextBox Text="{Binding MangaSearchText}"
+                    Watermark="Введите название манги и нажмите Enter..."
+                     AcceptsReturn="False">
+                   <TextBox.KeyBindings>
+        <KeyBinding Gesture="Enter"
+                    Command="{Binding SearchMangaCommand}"/>
+    </TextBox.KeyBindings>
+</TextBox>
+            </Grid>
+
+            <TextBlock Text="{Binding SearchError}"
+                       Foreground="#F87171"
+                       TextWrapping="Wrap"/>
+
+            <TextBlock Text="Результаты поиска"
+                       Foreground="#A78BFA"
+                      FontSize="13"/>
+
+            <ItemsControl ItemsSource="{Binding SearchResults}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:Manga">
+                        <Border Background="#191D2C"
+                                CornerRadius="12"
+                                Padding="15"
+                                Margin="0,5">
+                            <Grid ColumnDefinitions="90,*"
+                                  ColumnSpacing="15">
+
+                                <Image Grid.Column="0"
+                                       Source="{ Binding CoverBitmap}"
+                                       Width="90"
+                                       Height="130"
+                                       Stretch="UniformToFill"/>
+
+                                <StackPanel Grid.Column="1"
+                                            Spacing="8">
+                                    <TextBlock Text="{Binding Title}"
+                                               Foreground="White"
+                                               FontSize="19"
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"/>
+
+                                    <TextBlock Text="{Binding Author}"
+                                               Foreground="#A78BFA"/>
+
+                                    <TextBlock Text="{Binding Description}"
+                                               Foreground="#A7ADC0"
+                                               TextWrapping="Wrap"
+                                               MaxHeight="90"/>
+
+                                    <Button Content="Добавить в свою библиотеку"
+                                        Command="{Binding $parent[UserControl].DataContext.AddSearchMangaCommand}"
+                                          CommandParameter="{Binding}"
+                                             Background="#A78BFA"
+                                             HorizontalAlignment="Left"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,261 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MangaVerse71.ViewModels"
+
+        xmlns:models="using:MangaVerse71.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="MangaVerse71.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Manga Verse"
+        Width="1200"
+        Height="760"
+        MinWidth="900"
+        MinHeight="600"
+        Background="#090B12">
+
+
+    <Grid ColumnDefinitions="230,*">
+        <ContentControl Content="{Binding CurrentPage}"/>
+
+
+
+        <Border Grid.Column="0"
+                Background="#111522"
+                Padding="22">
+
+            <StackPanel Spacing="28">
+
+                <StackPanel Spacing="4">
+                    <TextBlock Text="MANGA"
+                               Foreground="White"
+                               FontSize="27"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="VERSE"
+                               Foreground="#A78BFA"
+                               FontSize="13"/>
+                </StackPanel>
+
+                <Border Height="1" Background="#292E40"/>
+
+                <StackPanel Spacing="15">
+                    <TextBlock Text="ТВОЙ МИР"
+                               Foreground="#626A80"
+                               FontSize="11"/>
+                    <TextBlock Text="У каждой истории своя вселенная."
+                               Foreground="#A7ADC0"
+                               FontSize="13"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <Border Background="#191D2C"
+                        CornerRadius="12"
+                        Padding="12">
+                    <TextBlock Text="01  Моя коллекция"
+                               Foreground="#A78BFA"
+                               FontSize="12"/>
+                </Border>
+
+                <Border Background="#191D2C"
+                        CornerRadius="12"
+                        Padding="12">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="MANGA VERSE"
+                                   Foreground="#A78BFA"
+                                   FontSize="11"/>
+                        <TextBlock Text="Твоя история начинается здесь."
+                                   Foreground="White"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="ТВОЯ ВСЕЛЕННАЯ"
+                           Foreground="#626A80"
+                           FontSize="11"/>
+
+                <TextBlock Text="Место, где живут тысячи историй."
+                           Foreground="#A7ADC0"
+                           FontSize="13"
+                           TextWrapping="Wrap"/>
+
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Margin="35" Spacing="25">
+
+                <Border Background="#191D2C"
+                        CornerRadius="20"
+                        Padding="28">
+
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="ДОБРО ПОЖАЛОВАТЬ В MANGA VERSE"
+                                   Foreground="#A78BFA"
+                                   FontSize="11"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="Открой неизведанное."
+                                   Foreground="White"
+                                   FontSize="32"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <TextBlock Text="Собирай любимые истории, открывай новые миры и создавай собственную коллекцию."
+                                   Foreground="#A7ADC0"
+                                   FontSize="14"
+                                   TextWrapping="Wrap"/>
+                        </StackPanel>
+                </Border>
+
+                <StackPanel Spacing="12">
+                    <TextBlock Text="ТВОЯ КОЛЛЕКЦИЯ"
+                               Foreground="#A78BFA"
+                               FontSize="11"
+                               FontWeight="Bold"/>
+
+                    <Grid ColumnDefinitions="*,*,*"
+                          ColumnSpacing="12">
+
+                        <Border Grid.Column="0"
+                                Background="#191D2C"
+                                CornerRadius="14"
+                                Padding="15">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Всего произведений"
+                                           Foreground="#A7ADC0"
+                                           FontSize="12"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding MangaList.Count}"
+                                           Foreground="White"
+                                           FontSize="30"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                Background="#191D2C"
+                                CornerRadius="14"
+                                Padding="15">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Читаю сейчас"
+                                           Foreground="#A7ADC0"
+                                           FontSize="12"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding MangaList.Count}"
+                                           Foreground="#A78BFA"
+                                           FontSize="30"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2"
+                                Background="#191D2C"
+                                CornerRadius="14"
+                                Padding="15">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Завершено"
+                                           Foreground="#A7ADC0"
+                                           FontSize="12"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="—"
+                                           Foreground="#A78BFA"
+                                           FontSize="30"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+
+                    </Grid>
+                </StackPanel> 
+                <StackPanel Spacing="12">
+
+                    <TextBlock Text="НЕДАВНО ДОБАВЛЕННЫЕ"
+                               Foreground="#A78BFA"
+                               FontSize="11"
+                               FontWeight="Bold"/>
+
+                    <TextBlock Text="Твоя библиотека"
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Bold"/>
+
+                    <ItemsControl ItemsSource="{Binding MangaList}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:Manga">
+
+                                <Button Command="{Binding $parent[Window].DataContext.OpenMangaDetailsCommand}"
+                                        CommandParameter="{Binding}"
+                                        Background="#191D2C"
+                                        Padding="15"
+                                        Margin="0,4"
+                                        HorizontalContentAlignment="Stretch">
+                                    
+                                    <Grid ColumnDefinitions="65,*"
+
+
+ColumnSpacing="14">
+
+                                        <Border Grid.Column="0"
+                                                Width="65"
+                                                Height="90"
+                                                CornerRadius="7"
+                                                ClipToBounds="True">
+                                            <Image Source="{Binding CoverBitmap}"
+                                                   Stretch="UniformToFill"/>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1"
+                                                    VerticalAlignment="Center"
+                                                    Spacing="7">
+
+                                            <TextBlock Text="{Binding Title}"
+                                                       Foreground="White"
+                                                       FontSize="17"
+                                                       FontWeight="Bold"
+                                                       TextWrapping="Wrap"/>
+
+                                            <TextBlock Text="{Binding Author}"
+                                                       Foreground="#A7ADC0"
+                                                       FontSize="13"/>
+
+                                            <TextBlock Text="{Binding Status}"
+                                                       Foreground="#A78BFA"
+                                                       FontSize="12"/>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Button>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+
+                <Border Background="#191D2C"
+                        CornerRadius="14"
+                        Padding="20">
+
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="MANGA VERSE"
+                                   Foreground="#A78BFA"
+                                   FontSize="12"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="Каждая история оставляет след."
+                                   Foreground="White"
+                                   FontSize="19"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="Продолжай исследовать свою вселенную."
+                                   Foreground="#A7ADC0"
+                                   FontSize="13"/>
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

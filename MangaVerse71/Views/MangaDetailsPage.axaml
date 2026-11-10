@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MangaVerse71.ViewModels"
+             x:Class="MangaVerse71.Views.MangaDetailsPage"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollViewer>
+        <StackPanel Margin="35" Spacing="20">
+
+            <TextBlock Text="Manga Details"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Foreground="White"/>
+
+            <Border Background="#191D2C"
+                    CornerRadius="16"
+                    Padding="22">
+
+                <StackPanel Spacing="15">
+
+                    <TextBlock Text="{Binding SelectedManga.Title}"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="{Binding SelectedManga.Author}"
+                               FontSize="17"
+                               Foreground="#A78BFA"/>
+
+                    <TextBlock Text="Description"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="White"/>
+
+                    <TextBlock Text="{Binding SelectedManga.Description}"
+                               Foreground="#A7ADC0"
+                               TextWrapping="Wrap"/>
+
+                    <TextBlock Text="{Binding SelectedManga.Status}"
+                               Foreground="#A78BFA"/>
+
+                    <TextBlock Text="{Binding SelectedManga.TotalChapters,
+                                               StringFormat='Chapters: {0}'}"
+                               Foreground="#A7ADC0"/>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
+
+
+
+
+
+

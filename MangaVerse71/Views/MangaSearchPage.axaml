@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MangaVerse71.ViewModels"
+             x:Class="MangaVerse71.Views.MangaSearchPage"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollViewer>
+        <StackPanel Margin="30" Spacing="20">
+
+            <TextBlock Text="Manga Search"
+                       FontSize="30"
+                       FontWeight="Bold"
+                       Foreground="White"/>
+
+            <TextBlock Text="Find your next favorite story."
+                       Foreground="#A7ADC0"/>
+
+            <Grid ColumnDefinitions="*,Auto"
+                  ColumnSpacing="10">
+
+                <TextBox Grid.Column="0"
+                         Watermark="Enter manga title..."
+                         Text="{Binding MangaSearchText, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"/>
+
+                <Button Grid.Column="1"
+                        Content="Search"
+                        Command="{Binding SearchMangaCommand}"/>
+
+            </Grid>
+
+            <TextBlock Text="{Binding SearchError}"
+                       Foreground="#FF7777"
+                       TextWrapping="Wrap"/>
+
+            <TextBlock Text="Searching..."
+                       IsVisible="{Binding IsSearching}"
+                       Foreground="#A78BFA"/>
+
+            <ItemsControl ItemsSource="{Binding SearchResults}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#191D2C"
+                                CornerRadius="14"
+                                Padding="15"
+                                Margin="0,0,0,12">
+
+                            <StackPanel Spacing="8">
+
+                                <TextBlock Text="{Binding Title}"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="White"/>
+
+                                <TextBlock Text="{Binding Author}"
+                                           Foreground="#A78BFA"/>
+
+                                <TextBlock Text="{Binding Description}"
+                                           Foreground="#A7ADC0"
+                                           TextWrapping="Wrap"
+                                           MaxLines="5"/>
+
+                                <Button Content="Add to Library"
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding $parent[ItemsControl].DataContext.AddSearchMangaCommand}"
+                                        CommandParameter="{Binding}"/>
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

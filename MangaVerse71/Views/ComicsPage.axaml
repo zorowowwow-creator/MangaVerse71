@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MangaVerse71.ViewModels"
+             xmlns:models="using:MangaVerse71.Models"
+             x:Class="MangaVerse71.Views.ComicsPage"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollViewer Background="#111522">
+        <StackPanel Margin="25" Spacing="15">
+
+            <Button Content="← НА ГЛАВНУЮ"
+                    Command="{Binding GoHomeCommand}"
+                    Background="#191D2C"
+                    Foreground="White"
+                    HorizontalAlignment="Left"/>
+
+            <TextBlock Text="COMICS LIBRARY"
+                       Foreground="#A78BFA"
+                       FontSize="13"/>
+
+            <TextBlock Text="Поиск комиксов"
+                       Foreground="White"
+                       FontSize="30"
+                       FontWeight="Bold"/>
+
+            <Grid ColumnDefinitions="*,Auto"
+                  ColumnSpacing="10">
+                <TextBox Grid.Column="0"
+                         Text="{Binding ComicSearchText}"
+                         Watermark="Введите название комикса..."/>
+
+                <Button Grid.Column="1"
+                        Content="НАЙТИ"
+                        Command="{Binding SearchComicsCommand}"
+                        Background="#A78BFA"
+                        Foreground="White"/>
+            </Grid>
+
+            <TextBlock Text="{Binding ComicSearchError}"
+                       Foreground="#F87171"
+                       TextWrapping="Wrap"/>
+
+            <ItemsControl ItemsSource="{Binding ComicResults}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:Manga">
+                        <Border Background="#191D2C"
+                                CornerRadius="12"
+                                Padding="15"
+                                Margin="0,5">
+                            <Grid ColumnDefinitions="90,*"
+                                  ColumnSpacing="15">
+
+                                <Image Grid.Column="0"
+                                       Source="{Binding CoverBitmap}"
+                                       Width="90"
+                                       Height="130"
+                                       Stretch="UniformToFill"/>
+
+                                <StackPanel Grid.Column="1"
+                                            Spacing="8">
+                                    <TextBlock Text="{Binding Title}"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"/>
+
+                                    <TextBlock Text="{Binding Author}"
+                                               Foreground="#A78BFA"/>
+                                               <Button Content="ДОБАВИТЬ В БИБЛИОТЕКУ"
+                                      Command="{Binding $parent[UserControl].DataContext.AddComicCommand}"
+                                      CommandParameter="{Binding}"
+                                        Background="#A78BFA"
+                                      Foreground="White"
+                                       HorizontalAlignment="Left"/>
+                                               
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
